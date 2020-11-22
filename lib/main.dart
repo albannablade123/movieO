@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_programming_project/widgets/Homepage-banner-item.dart';
 import 'package:mobile_programming_project/widgets/list-of-movies.dart';
+import 'package:mobile_programming_project/widgets/movie_detail.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,24 +16,33 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
+        accentColor: Colors.deepOrangeAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       darkTheme: ThemeData.dark(),
       home: HomeScreen(),
       routes: {
-        topfive.routeName: (ctx) => topfive(),
+        MovieList.routeName: (ctx) => MovieList(),
+        MovieDetail.routeName: (ctx) => MovieDetail(),
       },
     );
   }
 }
 
+/*firg-note: 
+- Changed topFive to MovieList
+- Added MovieDetail in the routes
+- Homepage-banner-item now takes 4th argument, which is the route destination
+*/
+
 class HomeScreen extends StatelessWidget {
+  final List<String> list = List.generate(10, (index) => "Movie $index");
 
   @override
-  final List<String> list = List.generate(10, (index) => "Movie $index");
   Widget build(BuildContext context) {
-    var isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    var isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrangeAccent,
@@ -60,27 +70,44 @@ class HomeScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              HomepageBannerItem(isLandscape, 'https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_.jpg', 'Out top 10 movie picks'),
-              HomepageBannerItem(isLandscape, 'https://images-na.ssl-images-amazon.com/images/I/51BANINoAxL._AC_.jpg', 'Movie of the Day'),
-              HomepageBannerItem(isLandscape, 'https://images-na.ssl-images-amazon.com/images/I/918B9zoR7zL._AC_SL1500_.jpg', 'Create your own List'),
-            ]
-          ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            HomepageBannerItem(
+              isLandscape,
+              'https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_.jpg',
+              'Out top 10 movie picks',
+              () {
+                Navigator.of(context).pushNamed(MovieList.routeName);
+              },
+            ),
+            HomepageBannerItem(
+              isLandscape,
+              'https://images-na.ssl-images-amazon.com/images/I/51BANINoAxL._AC_.jpg',
+              'Movie of the Day',
+              () {
+                Navigator.of(context)
+                    .pushNamed(MovieDetail.routeName, arguments: 'm1');
+              },
+            ),
+            HomepageBannerItem(
+              isLandscape,
+              'https://images-na.ssl-images-amazon.com/images/I/918B9zoR7zL._AC_SL1500_.jpg',
+              'Create your own List',
+              () {
+                Navigator.of(context).pushNamed(MovieList.routeName);
+              },
+            ),
+          ]),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         backgroundColor: Colors.deepOrangeAccent,
         child: Icon(Icons.add),
+        onPressed: () {},
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-
-
-
 
 class Search extends SearchDelegate {
   final List<String> listExample;
@@ -118,7 +145,10 @@ class Search extends SearchDelegate {
     );
   }
 
-  List<String> recentList = ["Planet of the Apes", "Barney The Dinosaur: zombie land"];
+  List<String> recentList = [
+    "Planet of the Apes",
+    "Barney The Dinosaur: zombie land"
+  ];
 
   @override
   Widget buildSuggestions(BuildContext context) {
