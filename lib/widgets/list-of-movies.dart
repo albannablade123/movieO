@@ -12,6 +12,8 @@ Widget buildCard(int index, String MovieName, String ImageName,
     String ReleaseDate, double rating) {
   return FlatButton(
     child: Card(
+      elevation: 12,
+      shadowColor: index == 0 ? Colors.yellowAccent : Colors.black,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ListTile(
         leading: CircleAvatar(
