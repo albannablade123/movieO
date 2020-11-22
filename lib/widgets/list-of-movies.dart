@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 
-class topfive extends StatefulWidget {
+class MovieList extends StatefulWidget {
   static const routeName = 'movie-list';
 
   @override
-  _topfiveState createState() => _topfiveState();
+  _MovieListState createState() => _MovieListState();
 }
 
-Widget buildCard(int index, String MovieName, String ImageName,
-    String ReleaseDate, double rating) {
+Widget buildCard(int index, String movieName, String imageName,
+    String releaseDate, double rating) {
   return FlatButton(
     child: Card(
       elevation: 12,
@@ -26,18 +26,22 @@ Widget buildCard(int index, String MovieName, String ImageName,
             ),
           ),
         ),
-        title: Text(' $MovieName',style: TextStyle(fontWeight: FontWeight.bold),),
-        subtitle: Text('$ReleaseDate'),
+        title: Text(
+          ' $movieName',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text('$releaseDate'),
         trailing: Text(
           'IMDB rating: $rating',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     ),
+    onPressed: () {},
   );
 }
 
-class _topfiveState extends State<topfive> {
+class _MovieListState extends State<MovieList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
