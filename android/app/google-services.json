@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "203052870132",
+    "project_id": "cinema-companion-app",
+    "storage_bucket": "cinema-companion-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:203052870132:android:a4e5aa776486e1269631a1",
+        "android_client_info": {
+          "package_name": "com.fireeyes.mobile_programming_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "203052870132-ochrpi0qaj54n22hhovkvbllcbg9g184.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsblauJwZZHf7zroCQam6Pobb6HlzTrio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "203052870132-ochrpi0qaj54n22hhovkvbllcbg9g184.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
