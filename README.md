@@ -32,7 +32,7 @@ $ flutter run
 ```
 
 ## Built With
-*Flutter 
+* Flutter 
 * Dart
 * Visual Studio Code
-*
+
